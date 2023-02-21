@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="forecastDay"
+            type="sg.projects.weatherapp.data.Forecastday" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="2dp"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="10dp"
+        android:background="@android:color/transparent" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_background" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="17sp"
+                        android:layout_marginLeft="10dp"
+                        android:text="@{forecastDay.date}"
+                        android:textColor="@color/white"
+                        tools:text="2023-01-02" />
+
+                    <TextView
+                        android:id="@+id/tvTemperature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:layout_gravity="center"
+                        android:layout_toRightOf="@id/tvTime"
+                        android:layout_marginLeft="6dp"
+                        android:padding="4dp"
+                        android:text="@{Float.toString(forecastDay.day.averageTemperatureCelsius) + `°C`}"
+                        android:textColor="@color/white"
+                        tools:text="25°C" />
+
+                    <TextView
+                        android:id="@+id/tvWeather"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="17sp"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:layout_toRightOf="@id/tvTemperature"
+                        android:padding="4dp"
+                        app:setText="@{forecastDay.day.condition.text}"
+                        android:textColor="@color/white"
+                        tools:text="Partly Cloudy" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/ivWeather"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="20dp"
+                    android:padding="4dp"
+                    app:imageUrl="@{forecastDay.day.condition.icon}"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
